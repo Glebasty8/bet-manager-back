@@ -21,6 +21,7 @@ const loadFile = file => sequelize.import(`./models/${file}.ts`);
 export const models = {
     User: loadFile('User'),
     Bet: loadFile('Bet'),
+    Subscription: loadFile('Subscription'),
 };
 
 export default sequelize;

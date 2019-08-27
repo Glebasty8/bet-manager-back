@@ -6,6 +6,8 @@ import db from '../db';
 import routes from './routes';
 import middleware from './middlewares';
 
+const PORT = process.env.PORT || 5000;
+
 db.authenticate()
     .then(() => {
         console.log('Connection with database has been established successfully.');
@@ -16,8 +18,12 @@ db.authenticate()
         //Set all routes from routes folder
         app.use("/api", routes);
 
-        app.listen(process.env.DEV_PORT, () => {
-            console.log(`Express server has started on port ${process.env.DEV_PORT}!`);
+        // app.get('*', (req, res) => {
+        //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+        // });
+
+        app.listen(PORT, () => {
+            console.log(`Express server has started on port ${PORT}!`);
         });
     })
     .catch(error => console.log(error));

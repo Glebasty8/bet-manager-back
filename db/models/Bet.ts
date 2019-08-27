@@ -8,6 +8,8 @@ export default (sequelize: any, DataTypes: any) => {
         competitors: DataTypes.ARRAY(DataTypes.TEXT),
         isFree: DataTypes.BOOLEAN,
         userId: DataTypes.INTEGER,
+        status: DataTypes.INTEGER,
+        eventDate: DataTypes.DATE
     }, {
         freezeTableName: true,
         tableName: 'bets',
@@ -16,7 +18,7 @@ export default (sequelize: any, DataTypes: any) => {
     });
 
     Bet.associate = models => {
-        models.Comment.belongsTo(models.User, {foreignKey: 'userId', as: 'user'});
+        models.Bet.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
     };
 
     return Bet;

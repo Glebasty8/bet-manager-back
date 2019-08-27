@@ -24,7 +24,7 @@ const hashPassword = (password) => {
 
 const compareWithTrim = (plainText, hash) => {
     return compare(String(plainText).trim(), hash)
-}
+};
 
 function compare(plainText, hash) {
     return new Promise((resolve, reject) => {

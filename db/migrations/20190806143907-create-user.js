@@ -19,9 +19,6 @@ module.exports = {
             role: {
                 type: Sequelize.TEXT,
             },
-            age: {
-              type: Sequelize.INTEGER
-            },
             tempPassword: {
               type: Sequelize.TEXT
             },
@@ -37,9 +34,30 @@ module.exports = {
                 type: Sequelize.DATE,
                 allowNull: true,
             },
+            recoveryToken: {
+                type: Sequelize.JSONB,
+                allowNull: true,
+            },
+            dateOfBirth: {
+                type: Sequelize.DATE,
+                allowNull: true
+            },
+            bank: {
+                type: Sequelize.DECIMAL,
+                allowNull: true
+            },
+            balance: {
+                type: Sequelize.DECIMAL,
+                allowNull: false,
+                defaultValue: 0,
+            },
+            subscriptionId: {
+                type: Sequelize.INTEGER,
+                allowNull: true
+            }
         });
     },
-    down: (queryInterface, Sequelize) => {
+    down: (queryInterface) => {
         return queryInterface.dropTable('users');
     }
 };

@@ -7,9 +7,11 @@ module.exports = {
       email: 'admin@gmail.com',
       password: '$2b$08$fe3RsmkH76OfjYRQHVugMueui.grdI3CNlOrYua85B7GIOyW0snpi',
       role: 'admin',
-      age: '20',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      dateOfBirth: '04-07-1997',
+      balance: 2000,
+      subscriptionId: 1
     }], {});
   },
 

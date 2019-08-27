@@ -35,9 +35,18 @@ module.exports = {
                 type: Sequelize.DATE,
                 allowNull: true,
             },
+            status: {
+                type: Sequelize.INTEGER,
+                defaultValue: 1,
+                allowNull: false
+            },
+            eventDate: {
+                type: Sequelize.DATE,
+                allowNull: false
+            }
         });
     },
-    down: (queryInterface, Sequelize) => {
+    down: (queryInterface) => {
         return queryInterface.dropTable('bets');
     }
 };

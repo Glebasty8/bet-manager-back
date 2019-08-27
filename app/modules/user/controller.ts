@@ -1,10 +1,12 @@
 import { Request, Response} from "express";
 import { models } from '../../../db';
 
+import UserDal from './dal';
+
 class Controller {
 
     static async getAll(req: Request, res: Response) {
-        const users = await models.User.findAll();
+        const users = await UserDal.findUsers();
         return res.status(200).send(users);
     }
 
@@ -14,13 +16,13 @@ class Controller {
     }
 
     static async get(req: Request, res: Response) {
-        const user = await models.User.findByPk(req.params.userId);
+        const user = await UserDal.findUserById(req.params.userId);
         return res.status(200).send(user);
     }
 
     static async update(req: Request, res: Response) {
-        const bet = await models.Bet.update(req.body, { returning: true });
-        return res.status(200).send(bet);
+        const user = await models.User.update(req.body, { where: { id: req.params.userId }, returning: true });
+        return res.status(200).send(user);
     }
 
     static async remove(req: Request, res: Response) {
