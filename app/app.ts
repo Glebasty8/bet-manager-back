@@ -18,9 +18,13 @@ db.authenticate()
         //Set all routes from routes folder
         app.use("/api", routes);
 
-        // app.get('*', (req, res) => {
+        // app.get('/', (req, res) => {
         //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
         // });
+
+        app.get("/", (req, res) => {
+           res.send('This is BetManager API - v.1.0')
+        });
 
         app.listen(PORT, () => {
             console.log(`Express server has started on port ${PORT}!`);

@@ -11,7 +11,7 @@ export default (sequelize: any, DataTypes: any) => {
     });
 
     Subscription.associate = models => {
-        models.Subscription.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+        models.Subscription.hasOne(models.User);
     };
 
     return Subscription;

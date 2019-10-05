@@ -1,7 +1,7 @@
 import { models } from '../../../db';
 
 const withInclude = [
-    // { model: models.Subscription, as: 'subscription' }
+    { model: models.Subscription, as: 'subscription' }
 ];
 
 const findUserByEmail = async (email) => {

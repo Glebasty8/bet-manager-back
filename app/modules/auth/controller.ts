@@ -42,7 +42,7 @@ class Controller {
           return res.status(400).send({ ok: false, 'message': 'Please enter a valid email address' });
       }
 
-      const user = await models.User.findOne({ where: { email } });
+      const user = await UserDal.findUserByEmail(email);
 
       if (!user) {
           return res.status(400).send({ ok: false, 'message': 'The credentials you provided is incorrect'});
@@ -51,6 +51,7 @@ class Controller {
       if (!await compareWithTrim(password, user.password)) {
             return res.status(400).send({ ok: false, 'message': 'The credentials you provided is incorrect' });
       }
+      console.log('user', user);
 
       const token = await encodeToken(userView(user.dataValues));
 

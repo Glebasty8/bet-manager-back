@@ -21,6 +21,8 @@ export default (sequelize: any, DataTypes: any) => {
         models.Bet.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
     };
 
+
+
     return Bet;
 };
 

@@ -9,6 +9,7 @@
     "prod": "tsc && node ./build/app.js",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
+    "start": "npm run dev",
     "heroku-postbuild": "npm run prod"
   },
   "keywords": [],

@@ -1,5 +1,5 @@
 export default (sequelize: any, DataTypes: any) => {
-    const User =  sequelize.define('user', {
+    const User = sequelize.define('user', {
         userName: DataTypes.TEXT,
         email: DataTypes.TEXT,
         password: DataTypes.TEXT,

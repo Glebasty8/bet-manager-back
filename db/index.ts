@@ -1,3 +1,4 @@
+const _ = require('lodash');
 import Sequelize from 'sequelize';
 
 const sequelize = new Sequelize({
@@ -21,7 +22,9 @@ const loadFile = file => sequelize.import(`./models/${file}.ts`);
 export const models = {
     User: loadFile('User'),
     Bet: loadFile('Bet'),
-    Subscription: loadFile('Subscription'),
+    Subscription: loadFile('Subscription')
 };
+
+_.each(models, model => (model.associate) ? model.associate(models) : null);
 
 export default sequelize;
