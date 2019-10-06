@@ -9,7 +9,7 @@ import extractToken from './extractToken';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const origin = {
-    origin: isProduction ? 'https://www.example.com' : '*',
+    origin: isProduction ? 'https://bet-man-app1.herokuapp.com' : '*',
 };
 
 const limiter = rateLimit({
