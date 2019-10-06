@@ -9,7 +9,7 @@
     "build": "tsc",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "start": "node ./build/app/app.js",
+    "start": "nodemon ./build/app/app.js",
     "heroku-postbuild": "npm run prod"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.3",
     "pg": "^7.12.0",
     "sequelize": "^5.12.3",
     "ts-node-dev": "^1.0.0-pre.40",
