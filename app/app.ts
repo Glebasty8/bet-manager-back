@@ -2,7 +2,7 @@ import * as express from 'express';
 
 import 'dotenv/config';
 
-import db from '../db';
+import db from './db';
 import routes from './routes';
 import middleware from './middlewares';
 

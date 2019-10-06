@@ -1,5 +1,5 @@
 import { Request, Response} from "express";
-import { models } from '../../../db';
+import { models } from '../../db';
 
 class Controller {
 

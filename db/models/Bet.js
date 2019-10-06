@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports =  (sequelize, DataTypes) => {
     const Bet = sequelize.define('bet', {
         sportType: DataTypes.TEXT,
         competition: DataTypes.TEXT,

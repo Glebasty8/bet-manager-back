@@ -14,10 +14,6 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "database_url": "postgres://jujbddyfudgcdw:281397c8adc45c4e24cdbf8b97273162d2737f4ac0737366c34acd1208d743b8@ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/d51467mlg5i75l",
   }
 }

@@ -3,7 +3,7 @@ import * as Sequelize from 'sequelize';
 const fs = require('fs');
 const handlebars = require('handlebars');
 
-import { models } from '../../../db';
+import { models } from '../../db';
 import UserDal from '../user/dal';
 import { isValidEmail } from '../../utils';
 import { compareWithTrim, encodeToken, hashPassword } from '../../utils/crypt';

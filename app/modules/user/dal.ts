@@ -1,4 +1,4 @@
-import { models } from '../../../db';
+import { models } from '../../db';
 
 const withInclude = [
     { model: models.Subscription, as: 'subscription' }
