@@ -10,7 +10,7 @@
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
     "start": "nodemon ./build/app/app.js",
-    "heroku-postbuild": "npm run prod"
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",
