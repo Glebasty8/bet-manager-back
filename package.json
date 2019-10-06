@@ -9,7 +9,7 @@
     "build": "tsc",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "start": "nodemon --port $PORT ./build/app/app.js",
+    "start": "nodemon -p $PORT ./build/app/app.js",
     "heroku-postbuild": "npm run build"
   },
   "keywords": [],
