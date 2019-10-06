@@ -17,7 +17,7 @@ const sequelize = new Sequelize({
     }
 });
 
-const loadFile = file => sequelize.import(`./models/${file}.ts`);
+const loadFile = file => sequelize.import(`./models/${file}.js`);
 
 export const models = {
     User: loadFile('User'),
