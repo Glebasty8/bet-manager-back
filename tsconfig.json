@@ -55,6 +55,25 @@
     "no-trailing-whitespace": true,
     "no-null-keyword": true,
     "prefer-const": true,
-    "jsdoc-format": true,
-  }
+    "jsdoc-format": true
+  },
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./build",
+    "allowJs": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "inlineSources": true,
+    "lib": ["es2015", "es7"]
+  },
+  "include": [
+    "./app/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".idea"
+  ]
 }

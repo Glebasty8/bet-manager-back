@@ -30,6 +30,6 @@ db.authenticate()
             console.log(`Express server has started on port ${PORT}!`);
         });
     })
-    .catch(error => console.log(error));
+    .catch((error: any) => console.log(error));
 
 

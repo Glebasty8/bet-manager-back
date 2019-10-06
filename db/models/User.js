@@ -1,4 +1,4 @@
-export default (sequelize: any, DataTypes: any) => {
+export default (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
         userName: DataTypes.TEXT,
         email: DataTypes.TEXT,

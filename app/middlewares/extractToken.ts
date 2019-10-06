@@ -1,6 +1,6 @@
 import { decodeToken } from '../utils/crypt';
 
-const extractToken = (req, res, next) => {
+const extractToken = (req: any, res: any, next: any) => {
     let token = null;
     if (req.headers && req.headers.authorization) {
         let parts = req.headers.authorization.split(' ');

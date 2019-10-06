@@ -1,4 +1,4 @@
-export default (sequelize: any, DataTypes: any) => {
+export default (sequelize, DataTypes) => {
     const Subscription = sequelize.define('subscription', {
        type: DataTypes.INTEGER,
        userId: DataTypes.INTEGER,

@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 
 const jwtSecret = process.env.JWT_SECRET || 'secret';
 
-function encodeToken(data) {
+function encodeToken(data: any) {
     return jwt.sign(data, jwtSecret)
 }
 
-function decodeToken(token) {
+function decodeToken(token: string) {
     return new Promise((resolve, reject) => {
-        jwt.verify(token, jwtSecret, (error, result) => {
+        jwt.verify(token, jwtSecret, (error: any, result: any) => {
             if (error)
                 reject(error);
             else
@@ -18,17 +18,17 @@ function decodeToken(token) {
     })
 }
 
-const hashPassword = (password) => {
+const hashPassword = (password: string) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
 };
 
-const compareWithTrim = (plainText, hash) => {
+const compareWithTrim = (plainText: string, hash: string) => {
     return compare(String(plainText).trim(), hash)
 };
 
-function compare(plainText, hash) {
+function compare(plainText: string, hash: string) {
     return new Promise((resolve, reject) => {
-        bcrypt.compare(plainText, hash, (error, result) => {
+        bcrypt.compare(plainText, hash, (error: any, result: any) => {
             if (error)
                 reject(error)
             else
@@ -37,17 +37,17 @@ function compare(plainText, hash) {
     })
 }
 
-const protectWithTrim = (plainText) => {
+const protectWithTrim = (plainText: string) => {
     return protect(String(plainText).trim())
 };
 
-function protect(plainText) {
+function protect(plainText: string) {
     return new Promise((resolve, reject) => {
-        bcrypt.genSalt(10, (error, salt) => {
+        bcrypt.genSalt(10, (error: any, salt: any) => {
             if (error)
                 reject(error)
             else {
-                bcrypt.hash(plainText, salt, null, (error, result) => {
+                bcrypt.hash(plainText, salt, null, (error: any, result: any) => {
                     if (error)
                         reject(error)
                     else
@@ -58,14 +58,14 @@ function protect(plainText) {
     })
 }
 
-function tempToken(email) {
+function tempToken(email: string) {
     return encodeToken({
         email: email,
         createdAt: new Date()
     })
 }
 
-function actionToken(userId, action, objectId) {
+function actionToken(userId: any, action: any, objectId: any) {
     return encodeToken({
         id: userId,
         action,

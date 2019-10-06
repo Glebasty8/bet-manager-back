@@ -12,8 +12,8 @@ import { userView } from '../user/lib';
 
 const op = Sequelize.Op;
 
-const readHTMLFile = (path, callback) => {
-    fs.readFile(path, { encoding: 'utf-8' }, function (err, html) {
+const readHTMLFile = (path: any, callback: any) => {
+    fs.readFile(path, { encoding: 'utf-8' }, function (err: any, html: any) {
         if (err) {
             throw err;
             callback(err);
@@ -111,7 +111,7 @@ class Controller {
 
         await models.User.update({ recoveryToken: { token, expires: Date.now() + 86400000 }}, { where: { id: user.id }});
 
-        readHTMLFile(__dirname + '/../../templates/forgot-password-email.html', (err, html) => {
+        readHTMLFile(__dirname + '/../../templates/forgot-password-email.html', (err: any, html: any) => {
             const context = {
                 url: `http://localhost:3000/new-password?token=${token}`,
                 name: user.userName
@@ -144,7 +144,7 @@ class Controller {
 
         await models.User.update({ password: newHashedPassword, recoveryToken: null }, { where: { id: user.id }, returning: true });
 
-        readHTMLFile(__dirname + '/../../templates/reset-password-email.html', (err, html) => {
+        readHTMLFile(__dirname + '/../../templates/reset-password-email.html', (err: any, html: any) => {
             const context = {
                 name: user.userName
             };
