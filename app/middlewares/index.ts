@@ -13,8 +13,8 @@ const origin = {
 };
 
 const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    max: 5, // 5 requests,
+    windowMs: 60 * 1000, // 1 minute
+    max: 150, // 100 requests,
 })
 
 const middleware = (app: express.Application) => {

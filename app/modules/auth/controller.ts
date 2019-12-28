@@ -120,6 +120,7 @@ class Controller {
             const htmlToSend = template(context);
 
             const data = {
+                from: process.env.EMAIL_USERNAME,
                 to: user.email,
                 template: 'forgot-password-email',
                 subject: 'Password help has arrived!',
@@ -152,6 +153,7 @@ class Controller {
             const htmlToSend = template(context);
 
             const data = {
+                from: process.env.EMAIL_USERNAME,
                 to: user.email,
                 template: 'forgot-password-email',
                 subject: 'Password Reset Confirmation',

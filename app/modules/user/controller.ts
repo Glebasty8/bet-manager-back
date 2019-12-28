@@ -21,9 +21,10 @@ class Controller {
     }
 
     static async update(req: Request, res: Response) {
-        console.log('req.body', req);
-        const user = await models.User.update(req.body, { where: { id: req.params.userId }, returning: true });
-        return res.status(200).send(user);
+        await models.User.update(req.body, { where: { id: req.params.userId }});
+        const updatedUser = await UserDal.findUserById(req.params.userId);
+
+        return res.status(200).send(updatedUser);
     }
 
     static async remove(req: Request, res: Response) {
