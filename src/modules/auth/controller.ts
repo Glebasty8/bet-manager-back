@@ -86,6 +86,24 @@ class Controller {
 
         const token = await encodeToken(newUser.dataValues);
 
+        readHTMLFile(__dirname + '/../../templates/new-user-greeting-email.html', (err: any, html: any) => {
+            const context = {
+                name: newUser.userName
+            };
+            const template = handlebars.compile(html);
+            const htmlToSend = template(context);
+
+            const data = {
+                from: process.env.EMAIL_USERNAME,
+                to: email,
+                template: 'new-user-greeting-email',
+                subject: 'Welcome to BetManager',
+                html: htmlToSend,
+            };
+
+            sendEmail(data)
+        });
+
         return res.status(201).send(token);
     }
 

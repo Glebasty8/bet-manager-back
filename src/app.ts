@@ -18,7 +18,7 @@ db.authenticate()
         //Set all routes from routes folder
         app.use("/api", routes);
 
-        // app.get('/', (req, res) => {
+        // src.get('/', (req, res) => {
         //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
         // });
 

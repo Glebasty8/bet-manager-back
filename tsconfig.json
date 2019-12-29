@@ -70,7 +70,7 @@
     "lib": ["es2015", "es7"]
   },
   "include": [
-    "./app/**/*"
+    "./src/**/*"
   ],
   "exclude": [
     "node_modules",
