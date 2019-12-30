@@ -59,7 +59,7 @@
   },
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./build",
+    "outDir": "./build/src",
     "allowJs": true,
     "noImplicitAny": true,
     "strictNullChecks": true,

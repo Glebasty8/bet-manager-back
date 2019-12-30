@@ -5,12 +5,12 @@
   "main": "app.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
-    "build": "tsc -b && npm run copy-email-templates",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "build": "tsc && npm run copy-email-templates",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
     "start": "nodemon ./build/app.js",
-    "copy-email-templates": "copyfiles src/**/*.html 'build/templates'",
+    "copy-email-templates": "copyfiles src/templates/*.html build",
     "heroku-postbuild": "npm run build"
   },
   "keywords": [],
