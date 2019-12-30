@@ -2,14 +2,14 @@
   "name": "bet-manager-back",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "dev": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "build": "tsc && npm run copy-email-templates",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize db:seed:all",
-    "start": "nodemon ./build/app.js",
+    "start": "nodemon build/index.js",
     "copy-email-templates": "copyfiles src/templates/*.html build",
     "heroku-postbuild": "npm run build"
   },
