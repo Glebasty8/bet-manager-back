@@ -86,7 +86,7 @@ class Controller {
 
         const token = await encodeToken(newUser.dataValues);
 
-        readHTMLFile(__dirname + '/../../templates/new-user-greeting-email.html', (err: any, html: any) => {
+        readHTMLFile(__dirname + 'src/templates/new-user-greeting-email.html', (err: any, html: any) => {
             const context = {
                 name: newUser.userName
             };
@@ -129,7 +129,7 @@ class Controller {
 
         await models.User.update({ recoveryToken: { token, expires: Date.now() + 86400000 }}, { where: { id: user.id }});
 
-        readHTMLFile(__dirname + '/../../templates/forgot-password-email.html', (err: any, html: any) => {
+        readHTMLFile(__dirname + 'src/templates/forgot-password-email.html', (err: any, html: any) => {
             const context = {
                 url: `http://localhost:3000/new-password?token=${token}`,
                 name: user.userName
@@ -163,7 +163,7 @@ class Controller {
 
         await models.User.update({ password: newHashedPassword, recoveryToken: null }, { where: { id: user.id }, returning: true });
 
-        readHTMLFile(__dirname + '/../../templates/reset-password-email.html', (err: any, html: any) => {
+        readHTMLFile(__dirname + 'src/templates/reset-password-email.html', (err: any, html: any) => {
             const context = {
                 name: user.userName
             };
