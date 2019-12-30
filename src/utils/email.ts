@@ -10,6 +10,8 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmail = (mailOptions: any) => {
+    console.log('process.env.EMAIL_USERNAME', process.env.EMAIL_USERNAME);
+    console.log('EMAIL_PASSWORD', process.env.EMAIL_PASSWORD);
     return transporter.sendMail(mailOptions, (err: any, info: any) => {
         if (err) {
             console.log(err)
