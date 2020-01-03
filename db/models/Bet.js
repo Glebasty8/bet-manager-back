@@ -1,6 +1,6 @@
 module.exports =  (sequelize, DataTypes) => {
     const Bet = sequelize.define('bet', {
-        sportType: DataTypes.TEXT,
+        sportTypeId: DataTypes.INTEGER,
         competition: DataTypes.TEXT,
         forecast: DataTypes.TEXT,
         betAmount: DataTypes.FLOAT,
@@ -19,6 +19,7 @@ module.exports =  (sequelize, DataTypes) => {
 
     Bet.associate = models => {
         models.Bet.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+        models.Bet.belongsTo(models.SportType, { foreignKey: 'sportTypeId', as: 'sportType' });
     };
 
     return Bet;

@@ -32,7 +32,8 @@ const loadFile = (file: any) => sequelize.import(`../db/models/${file}.js`);
 export const models = {
     User: loadFile('User'),
     Bet: loadFile('Bet'),
-    Subscription: loadFile('Subscription')
+    Subscription: loadFile('Subscription'),
+    SportType: loadFile('SportType')
 };
 
 _.each(models, (model: any) => (model.associate) ? model.associate(models) : null);

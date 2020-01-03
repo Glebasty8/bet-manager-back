@@ -8,7 +8,7 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             sportType: {
-                type: Sequelize.TEXT
+                type: Sequelize.INTEGER
             },
             competition: Sequelize.TEXT,
             forecast: Sequelize.TEXT,

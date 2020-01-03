@@ -11,7 +11,7 @@
     "seed": "sequelize db:seed:all",
     "start": "nodemon build/index.js",
     "copy-email-templates": "copyfiles src/templates/*.html build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run migrate && npm run seed && npm run build"
   },
   "keywords": [],
   "author": "",

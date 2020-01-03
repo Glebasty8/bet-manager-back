@@ -9,7 +9,8 @@ module.exports =  (sequelize, DataTypes) => {
         dateOfBirth: DataTypes.DATE,
         bank: DataTypes.DECIMAL,
         balance: DataTypes.DECIMAL,
-        subscriptionId: DataTypes.INTEGER
+        subscriptionId: DataTypes.INTEGER,
+        countryId: DataTypes.INTEGER
     }, {
         freezeTableName: true,
         tableName: 'users',

@@ -54,6 +54,9 @@ module.exports = {
             subscriptionId: {
                 type: Sequelize.INTEGER,
                 allowNull: true
+            },
+            countryId: {
+                type: Sequelize.INTEGER
             }
         });
     },
