@@ -7,7 +7,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            sportType: {
+            sportTypeId: {
                 type: Sequelize.INTEGER
             },
             competition: Sequelize.TEXT,
