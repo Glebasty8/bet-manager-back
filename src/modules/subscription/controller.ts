@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { v1 } from 'uuid';
+import { models } from '../../db';
 
 const LiqPay = require('../../liqpay-sdk/lib/liqpay');
 
 class Controller {
 
     static async payment(req: Request, res: Response) {
-        console.log('req.body', req.body);
         const { data, signature } = req.body;
         const liqpay = new LiqPay(process.env.LIQ_PAY_PUBLIC_KEY, process.env.LIQ_PAY_PRIVATE_KEY);
         const sign = liqpay.str_to_sign(
@@ -13,52 +14,62 @@ class Controller {
             data +
             process.env.LIQ_PAY_PRIVATE_KEY
         );
+
+        const buf = Buffer.from(data, 'base64').toString();
+        let order_id: any = null;
+        let parsedOrder: any = null;
+        try {
+            const { order_id: order } = JSON.parse(buf);
+            console.log('order', order);
+            order_id = order;
+            parsedOrder = JSON.parse(order);
+        } catch (err) {
+            console.log('err', err);
+        }
+
         if (sign === signature) {
-            liqpay.api("request", {
-                "action"   : "status",
-                "version"  : "3",
-                "order_id" : 1211622524
-            }, (json: any) => {
-                console.log('result', json);
-            });
-            // const html = liqpay.cnb_form({
-            //     'action'         : 'pay',
-            //     'amount'         : '1',
-            //     'currency'       : 'USD',
-            //     'description'    : 'description text',
-            //     'order_id'       : '1',
-            //     'version'        : '3'
-            // });
-            // console.log('html', html);
+            if (parsedOrder) {
+                const { orderId, subscriptionId, userId } = parsedOrder;
+                liqpay.api("request", {
+                    public_key: process.env.LIQ_PAY_PUBLIC_KEY,
+                    action: "status",
+                    version: 3,
+                    order_id
+                }, async (json: any) => {
+                    if (json.result === 'ok') {
+                        await models.UserSubscription.create({ subscriptionId, userId, orderId })
+                    }
+                });
+            }
         }
     }
 
 
-    static async subscriptions(req: Request, res: Response) {
+    static async subscriptions(req: any, res: Response) {
 
-        const subscriptions = [
-            { title: 'Subscription for day', value: 200, description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica' },
-            { title: 'Subscription for week', value: 400, description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica' },
-            { title: 'Subscription for month', value: 1000, description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica', }
-        ];
+        const subscriptions = await models.Subscription.findAll();
         const liqpay = new LiqPay(process.env.LIQ_PAY_PUBLIC_KEY, process.env.LIQ_PAY_PRIVATE_KEY);
 
-        console.log('liqpay', liqpay);
         const userSubscriptions = subscriptions.map((subscription: any) => {
-            const { data, signature } =  liqpay.cnb_object({
+            const order = {
+              subscriptionId: subscription.id,
+              userId: req.userId,
+              orderId: v1()
+            };
+            const orderString = JSON.stringify(order)
+            const { data, signature } = liqpay.cnb_object({
                 public_key: process.env.LIQ_PAY_PUBLIC_KEY,
                 version: 3,
-                order_id: 100,
+                order_id: orderString,
                 description: subscription.description,
-                amount: subscription.value,
+                amount: subscription.cost,
                 currency: 'RUB',
-                action: 'PAY'
+                action: 'pay',
+                language: 'ru',
             });
 
-            console.log('data', data);
-            console.log('signature', signature);
             return {
-                ...subscription,
+                ...subscription.dataValues,
                 data,
                 signature
             }

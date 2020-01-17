@@ -1,25 +1,21 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('subscriptions', {
+        return queryInterface.createTable('user-subscriptions', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            title: {
-              type: Sequelize.TEXT,
-              allowNull: false
+            subscriptionId: {
+                type: Sequelize.INTEGER,
+                allowNull: false
             },
-            cost: {
+            userId: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
             },
-            subscriptionTimeInHours: {
-              type: Sequelize.INTEGER,
-              allowNull: false,
-            },
-            description: {
+            orderId: {
                 type: Sequelize.TEXT
             },
             createdAt: {
@@ -37,6 +33,6 @@ module.exports = {
         });
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('subscriptions');
+        return queryInterface.dropTable('user-subscriptions');
     }
 };

@@ -1,7 +1,10 @@
 import { models } from '../../db';
 
 const withInclude = [
-    { model: models.Subscription, as: 'subscription' }
+    {
+        model: models.UserSubscription, as: 'subscriptions',
+        include: { model: models.Subscription, as: 'subscription' }
+    }
 ];
 
 const findUserByEmail = async (email: string) => {
@@ -9,7 +12,7 @@ const findUserByEmail = async (email: string) => {
 };
 
 const findUsers = async () => {
-  return models.User.findAll({ include: withInclude })
+  return models.User.findAll()
 };
 
 const findUserById = async (userId: any) => {

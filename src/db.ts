@@ -33,7 +33,8 @@ export const models = {
     User: loadFile('User'),
     Bet: loadFile('Bet'),
     Subscription: loadFile('Subscription'),
-    SportType: loadFile('SportType')
+    SportType: loadFile('SportType'),
+    UserSubscription: loadFile('UserSubscription')
 };
 
 _.each(models, (model: any) => (model.associate) ? model.associate(models) : null);

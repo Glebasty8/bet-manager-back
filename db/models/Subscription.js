@@ -1,8 +1,9 @@
 module.exports =  (sequelize, DataTypes) => {
     const Subscription = sequelize.define('subscription', {
-       type: DataTypes.INTEGER,
-       userId: DataTypes.INTEGER,
-       completionDate: DataTypes.DATE
+        title: DataTypes.TEXT,
+        cost: DataTypes.FLOAT,
+        description: DataTypes.TEXT,
+        subscriptionTimeInHours: DataTypes.INTEGER,
     }, {
         freezeTableName: true,
         tableName: 'subscriptions',
@@ -11,7 +12,7 @@ module.exports =  (sequelize, DataTypes) => {
     });
 
     Subscription.associate = models => {
-        models.Subscription.hasOne(models.User);
+        models.Subscription.hasMany(models.UserSubscription, { foreignKey: 'subscriptionId', as: 'subscriptions' });
     };
 
     return Subscription;

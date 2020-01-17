@@ -9,7 +9,6 @@ module.exports =  (sequelize, DataTypes) => {
         dateOfBirth: DataTypes.DATE,
         bank: DataTypes.DECIMAL,
         balance: DataTypes.DECIMAL,
-        subscriptionId: DataTypes.INTEGER,
         countryId: DataTypes.INTEGER
     }, {
         freezeTableName: true,
@@ -20,7 +19,7 @@ module.exports =  (sequelize, DataTypes) => {
 
     User.associate = models => {
         models.User.hasMany(models.Bet, { as: 'bets' });
-        models.User.belongsTo(models.Subscription, { foreignKey: 'subscriptionId', as: 'subscription' });
+        models.User.hasMany(models.UserSubscription, {as: 'subscriptions', foreignKey: 'userId'});
     };
 
     return User;
