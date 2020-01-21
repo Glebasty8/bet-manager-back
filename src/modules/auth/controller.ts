@@ -84,7 +84,7 @@ class Controller {
             ...rest,
         }, { returning: true });
 
-        const token = await encodeToken(newUser.dataValues);
+        const token = await encodeToken(userView(newUser.dataValues));
 
         readHTMLFile(__dirname + '/../../src/templates/new-user-greeting-email.html', (err: any, html: any) => {
             const context = {
