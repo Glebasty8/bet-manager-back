@@ -28,7 +28,6 @@ class Controller {
 
     static async auth(req: any, res: Response) {
         const { profile } = req;
-        console.log('profile', profile);
         res.status(200).send(profile)
     }
 
@@ -44,7 +43,6 @@ class Controller {
       }
 
       const user = await UserDal.findUserByEmail(email);
-      console.log('user', user);
 
       if (!user) {
           return res.status(400).send({ ok: false, 'message': 'The credentials you provided is incorrect'});
