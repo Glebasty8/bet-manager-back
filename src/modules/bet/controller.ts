@@ -12,21 +12,23 @@ class Controller {
 
     static async getAll(req: Request, res: Response) {
         const bets = await models.Bet.findAll();
-        console.log('bets', bets);
         return res.status(200).send(bets);
     }
 
     static async create(req: Request, res: Response) {
         const bet = await models.Bet.create(req.body, { returning: true });
         const { eventDate, sportTypeId, competition, forecast, coefficient, betAmount, competitors, isFree } = bet;
+        const eventDateFormatted = moment(eventDate).tz('Europe/Moscow').format('DD-MM-YYYY HH:mm');
+        const sportType = await models.SportType.findByPk(sportTypeId);
+        const sportTypeName = _.get(sportType, 'name', '');
+        const competitorsFormatted = competitors.reduce((acc: any, curr: any) => {
+            return `${acc} - ${curr}`;
+        }, '');
         if (isFree) {
-            const eventDateFormatted = moment(eventDate).tz('Europe/Moscow').format('DD-MM-YYYY HH:mm');
-            const sportType = await models.SportType.findByPk(sportTypeId);
-            const sportTypeName = _.get(sportType, 'name', '');
-            const competitorsFormatted = competitors.reduce((acc: any, curr: any) => {
-                return `${acc} - ${curr}`;
-            }, '');
             tg.sendMessage(process.env.PUBLIC_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n ${sportTypeName}.${competition} \n ${competitorsFormatted}: ${forecast} - ${coefficient}\n Рекомендуемая сумма ставки: ${betAmount}\n Удачи! 🍀`);
+        } else {
+            // send message to the private chat
+            tg.sendMessage(process.env.PRIVATE_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n ${sportTypeName}.${competition} \n ${competitorsFormatted}: ${forecast} - ${coefficient}\n Рекомендуемая сумма ставки: ${betAmount}\n Удачи! 🍀`);
         }
         return res.status(201).send(bet);
     }
