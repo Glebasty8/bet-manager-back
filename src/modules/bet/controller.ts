@@ -22,13 +22,14 @@ class Controller {
         const sportType = await models.SportType.findByPk(sportTypeId);
         const sportTypeName = _.get(sportType, 'name', '');
         const competitorsFormatted = competitors.reduce((acc: any, curr: any) => {
-            return `${acc} - ${curr}`;
+            return acc ? `${acc} - ${curr}` : curr;
         }, '');
+        console.log('isFree', isFree);
         if (isFree) {
-            tg.sendMessage(process.env.PUBLIC_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n ${sportTypeName}.${competition} \n ${competitorsFormatted}: ${forecast} - ${coefficient}\n Рекомендуемая сумма ставки: ${betAmount}\n Удачи! 🍀`);
+            tg.sendMessage(process.env.PUBLIC_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n${sportTypeName ? sportTypeName.split(' ')[0] : ''}. ${competition} \n${competitorsFormatted}: ${forecast} - ${coefficient}\nРекомендуемая сумма ставки: ${betAmount}\nУдачи! 🍀`);
         } else {
             // send message to the private chat
-            tg.sendMessage(process.env.PRIVATE_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n ${sportTypeName}.${competition} \n ${competitorsFormatted}: ${forecast} - ${coefficient}\n Рекомендуемая сумма ставки: ${betAmount}\n Удачи! 🍀`);
+            tg.sendMessage(process.env.PRIVATE_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n${sportTypeName ? sportTypeName.split(' ')[0] : ''}. ${competition} \n${competitorsFormatted}: ${forecast} - ${coefficient}\nРекомендуемая сумма ставки: ${betAmount}\nУдачи! 🍀`);
         }
         return res.status(201).send(bet);
     }
