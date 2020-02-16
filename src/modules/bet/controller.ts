@@ -24,7 +24,6 @@ class Controller {
         const competitorsFormatted = competitors.reduce((acc: any, curr: any) => {
             return acc ? `${acc} - ${curr}` : curr;
         }, '');
-        console.log('isFree', isFree);
         if (isFree) {
             tg.sendMessage(process.env.PUBLIC_GROUP_ID, `Начало матча: ${eventDateFormatted} (МСК)\n${sportTypeName ? sportTypeName.split(' ')[0] : ''}. ${competition} \n${competitorsFormatted}: ${forecast} - ${coefficient}\nРекомендуемая сумма ставки: ${betAmount}\nУдачи! 🍀`);
         } else {
